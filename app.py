@@ -19,6 +19,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 api = Api(app)
 
+db.init_app(app)
+
 @app.before_first_request
 def create_tables():
     db.create_all()
@@ -31,5 +33,5 @@ api.add_resource(Comment, '/article/<int:_id>/comments')
 api.add_resource(UserRegister, '/register')
 
 if __name__ == '__main__':
-    db.init_app(app)
+    
     app.run(debug=True)
