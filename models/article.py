@@ -39,7 +39,7 @@ class ArticleModel(db.Model):
             }
 
     def get_all_comments(self):
-        return self.comments
+        return [comment.json() for comment in self.comments]
 
     def update(self, data):
         if 'views' in data.keys():

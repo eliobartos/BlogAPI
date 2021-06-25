@@ -33,5 +33,4 @@ api.add_resource(Comment, '/article/<int:_id>/comments')
 api.add_resource(UserRegister, '/register')
 
 if __name__ == '__main__':
-    
     app.run(debug=True)
