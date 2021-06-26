@@ -10,7 +10,7 @@ class Comment(Resource):
 
     @jwt_required()
     def get(self, _id):
-        article = ArticleModel.query.filter_by(id=_id).first()
+        article = ArticleModel.find_by_id(_id)
         
         if article:
             return {'comments': article.get_all_comments()}
@@ -19,7 +19,7 @@ class Comment(Resource):
 
     @jwt_required()
     def post(self, _id):
-        article = ArticleModel.query.filter_by(id=_id).first()
+        article = ArticleModel.find_by_id(_id)
 
         data = Comment.parser.parse_args()
 

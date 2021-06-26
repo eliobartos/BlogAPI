@@ -15,7 +15,7 @@ class Article(Resource):
 
     @jwt_required()
     def get(self, _id): 
-        article = ArticleModel.query.filter_by(id=_id).first()
+        article = ArticleModel.find_by_id(_id)
         if article:
             return article.json()
         else:
@@ -23,7 +23,7 @@ class Article(Resource):
 
     @jwt_required()
     def post(self, _id):
-        if ArticleModel.query.filter_by(id=_id).first() is not None:
+        if ArticleModel.find_by_id(_id) is not None:
             return {'message': f'Article with id: {_id} already exists!'}
 
         data = Article.parser_post.parse_args()
@@ -33,7 +33,7 @@ class Article(Resource):
 
     @jwt_required()
     def put(self, _id):
-        article = ArticleModel.query.filter_by(id=_id).first()
+        article = ArticleModel.find_by_id(_id)
         if article is None:
             return {'message': f'Article with id: {_id} does not exist!'}
 
@@ -44,7 +44,7 @@ class Article(Resource):
 
     @jwt_required()
     def delete(self, _id):
-        article = ArticleModel.query.filter_by(id=_id).first()
+        article = ArticleModel.find_by_id(_id)
         if article:
             article.delete_from_db()
         return {'message': "Item Deleted!"}
